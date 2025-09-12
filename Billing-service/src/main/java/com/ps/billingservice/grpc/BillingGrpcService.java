@@ -1,9 +1,6 @@
 package com.ps.billingservice.grpc;
 
 import billing.BillingResponse;
-import billing.BillingResquest;
-import com.google.api.Billing;
-import com.ps.billingservice.BillingServiceApplication;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 import billing.BillingServiceGrpc;
