@@ -1,0 +1,13 @@
+### Update patient
+PUT http://localhost:4000/Patient/update-patient/223e4567-e89b-12d3-a456-426614174014
+Content-Type: application/json
+
+{
+  "name": "Isabella Mopper",
+  "address": "789 Willow St, Springfield",
+  "dateOfBirth": "1987-10-17",
+  "email": "isabella.walker@example.com",
+  "registration": "2024-03-29"
+}
+
+###
