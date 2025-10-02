@@ -6,6 +6,7 @@ import com.ps.patiantservice.Exception.PatientNotFoundException;
 import com.ps.patiantservice.Grpc.BillingServiceGrpcClient;
 import com.ps.patiantservice.dto.PatientRequest;
 import com.ps.patiantservice.dto.PatientResponse;
+import com.ps.patiantservice.kafka.KafkaProducer;
 import com.ps.patiantservice.mapper.PatientMapper;
 import com.ps.patiantservice.model.Patient;
 import com.ps.patiantservice.repository.PatientRepository;
@@ -26,6 +27,7 @@ public class PatientService {
     private final PatientRepository patientRepository;
     private final PatientMapper mapper;
     private final BillingServiceGrpcClient billingClient;
+    private final KafkaProducer kafkaProducer;
 
     public List<PatientResponse> getPatientDetails(){
         return patientRepository.findAll().stream().map(mapper::toPatientResponse).toList();
@@ -42,7 +44,8 @@ public class PatientService {
         patientRepository.save(patient);
 
         BillingResponse response = billingClient.createBillingAccount(patient.getId().toString(), patient.getName(), patient.getEmail());
-        log.info("Create billing account successful from patient service"+response.getAccountId());
+        kafkaProducer.sendEvent(patient);
+        log.error("Create billing account successful from patient service"+response.getAccountId());
         return mapper.toPatientResponse(patient);
 
     }

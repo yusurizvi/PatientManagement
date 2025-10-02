@@ -14,23 +14,23 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/Patient")
+@RequestMapping("/patients")
 @AllArgsConstructor
 public class controller {
 
     private final PatientService  patientService;
 
-    @GetMapping("/get-patients")
+    @GetMapping
     public ResponseEntity<List<PatientResponse>> getPatients(){
 
         List<PatientResponse> resp = patientService.getPatientDetails();
         return new ResponseEntity<>(resp, HttpStatus.OK);
     }
-    @PostMapping("/add-patient")
+    @PostMapping
     public ResponseEntity<PatientResponse> addPatient(@Validated({Default.class}) @RequestBody PatientRequest request){
         return new ResponseEntity<>(patientService.addPatient(request),HttpStatus.OK);
     }
-    @PutMapping("/update-patient/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<PatientResponse> updatePatient(@Validated({Default.class}) @RequestBody PatientRequest request, @PathVariable UUID id){
        return new ResponseEntity<>(patientService.updatePatient(id,request),HttpStatus.OK);
     }
