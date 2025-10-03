@@ -15,21 +15,22 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private Key secretKey;
+    private final Key secretKey;
 
-    public JwtUtil(@Value("${jwt_secret") String secret) {
+    public JwtUtil(@Value("${jwt.secret}") String secret) {
         byte [] KeyBytes  = Base64.getDecoder().decode(
                 secret.getBytes(StandardCharsets.UTF_8));
         this.secretKey = Keys.hmacShaKeyFor(KeyBytes);
     }
 
     public String getToken(String email, String role){
-        return Jwts.builder()
+        String token = Jwts.builder()
                 .subject(email)
                 .claim("role", role)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis()+1000*60*60+10))
                 .signWith(secretKey)
                 .compact();
+        return token;
     }
 }
