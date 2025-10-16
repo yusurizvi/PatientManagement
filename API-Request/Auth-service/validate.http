@@ -1,0 +1,5 @@
+### GET request to example server
+GET http://localhost:4004/auth/login/validate
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlckB0ZXN0LmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1OTkzMjM3MCwiZXhwIjoxNzU5OTM1OTcwfQ.-uz5KTGR9Ao2zvl9rbpo0CRsftN6xSmepXGavHZkIcs
+
+###
