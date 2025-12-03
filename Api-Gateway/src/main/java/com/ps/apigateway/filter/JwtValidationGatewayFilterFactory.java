@@ -32,6 +32,7 @@ public class JwtValidationGatewayFilterFactory extends AbstractGatewayFilterFact
                 exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                 return exchange.getResponse().setComplete();
             }
+            log.error("token {}",token);
             return webClient.get().uri("/validate")
                     .header("Authorization", token)
                     .retrieve()

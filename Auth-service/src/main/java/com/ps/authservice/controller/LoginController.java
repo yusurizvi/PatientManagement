@@ -24,8 +24,9 @@ public class LoginController {
         this.authService = authService;
     }
 
+    @Operation(summary = "Generate token on user login")
     @PostMapping
-    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
 
         loginRequest.setEmail("testuser@test.com");
         loginRequest.setPassword("password123");
@@ -34,7 +35,7 @@ public class LoginController {
         if(resp.isEmpty())
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         String token = resp.get();
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok(new LoginResponse(token));
     }
     @Operation(summary = "token validation endpoint ")
     @GetMapping("/validate")

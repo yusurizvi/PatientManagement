@@ -12,7 +12,7 @@ RUN mvn clean package
 
 RUN ls -la /app/target
 
-FROM openjdk:21-jdk AS runner
+FROM eclipse-temurin:21-jdk AS runner
 
 WORKDIR /app
 
